@@ -1,0 +1,30 @@
+<div class="posts-wrapper">
+  <h1 class="posts-header">Posts</h1>
+  <ul *ngIf="posts" class="posts">
+    <li *ngFor="let post of posts" class="post-item">
+      <div class="post-image-wrapper">
+        <img class="post-image" [src]="post.imageUrl" alt="space image">
+        <h4 class="post-image-desc">{{post.title}}</h4>
+      </div>
+      <div class="data-part">
+        <div class="top-data">
+          <div class="user">
+            <div class="user-icon-wrapper">
+              <img class="user-icon" src="../../../assets/user-icon.png" alt="user icon">
+            </div>
+            <div class="user-text">
+              <h6 class="user-name">John Smith</h6>
+              <p class="user-job">UX/UI Designer</p>
+            </div>
+          </div>
+          <div class="comments">
+            <span class="comments-amount">18</span>
+            <p class="comments-title">Comments</p>
+          </div>
+        </div>
+        <p class="post-text">{{post.shortDescription}}</p>
+        <button class="btn-read-more">Read More</button>
+      </div>
+    </li>
+  </ul>
+</div>
