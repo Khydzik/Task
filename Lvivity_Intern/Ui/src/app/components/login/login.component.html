@@ -3,10 +3,11 @@
   <form class="form" (ngSubmit)="doLogin()">
     <label>
       <input class="form-input"
-             type="userName"
+             type="text"
              name="userName"
-             placeholder="User name or email *"
+             placeholder="User name *"
              [(ngModel)]="userData.userName">
+      <span *ngIf="errorMessages.userName" class="error-block">{{errorMessages.userName}}</span>
     </label>
     <span class="field-required">This field is required</span>
     <label>
@@ -15,8 +16,10 @@
              name="password"
              placeholder="Password *"
              [(ngModel)]="userData.password">
+      <span *ngIf="errorMessages.password" class="error-block">{{errorMessages.password}}</span>
     </label>
     <a class="forgot-password" href="#">Forgot password?</a>
+    <span *ngIf="errorMessages.notFound" class="error-block">{{errorMessages.notFound}}</span>
     <button class="btn" type="submit">Log in</button>
   </form>
 </div>

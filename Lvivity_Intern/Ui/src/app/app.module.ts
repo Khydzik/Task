@@ -7,9 +7,11 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
 import {PostsComponent} from './components/posts/posts.component';
+import {HeaderComponent} from './components/header/header.component';
 
 import {ApiService} from './services/api.service';
-import { HeaderComponent } from './components/header/header.component';
+import {HideLoginGuardService} from './guards/hide-login-guard.service';
+import {AuthGuardService} from './guards/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { HeaderComponent } from './components/header/header.component';
     FormsModule
   ],
   providers: [
-    ApiService
+    ApiService,
+    HideLoginGuardService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

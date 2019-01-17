@@ -31,7 +31,6 @@ C:\Lvivity_Intern\WebApi\LearningProject\bin\Debug\netcoreapp2.2\LearningProject
 C:\Lvivity_Intern\WebApi\LearningProject\bin\Debug\netcoreapp2.2\LearningProject.runtimeconfig.dev.json
 C:\Lvivity_Intern\WebApi\LearningProject\bin\Debug\netcoreapp2.2\LearningProject.dll
 C:\Lvivity_Intern\WebApi\LearningProject\bin\Debug\netcoreapp2.2\LearningProject.pdb
-C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.csprojAssemblyReference.cache
 C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.csproj.CoreCompileInputs.cache
 C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.RazorAssemblyInfo.cache
 C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.RazorAssemblyInfo.cs
@@ -40,3 +39,17 @@ C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject
 C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.RazorTargetAssemblyInfo.cache
 C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.dll
 C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.pdb
+C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.csprojAssemblyReference.cache
+C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.csproj.GenerateResource.cache
+C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.Resources.Models.User.de.resources
+C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.Resources.Models.User.ru.resources
+C:\Lvivity_Intern\WebApi\LearningProject\bin\Debug\netcoreapp2.2\de\LearningProject.resources.dll
+C:\Lvivity_Intern\WebApi\LearningProject\bin\Debug\netcoreapp2.2\ru\LearningProject.resources.dll
+C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\de\LearningProject.resources.dll
+C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\ru\LearningProject.resources.dll
+C:\Lvivity_Intern\WebApi\LearningProject\bin\Debug\netcoreapp2.2\uk\LearningProject.resources.dll
+C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\uk\LearningProject.resources.dll
+C:\Lvivity_Intern\WebApi\LearningProject\bin\Debug\netcoreapp2.2\en\LearningProject.resources.dll
+C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.Resources.Models.User.en.resources
+C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\en\LearningProject.resources.dll
+C:\Lvivity_Intern\WebApi\LearningProject\obj\Debug\netcoreapp2.2\LearningProject.Models.User.uk.resources

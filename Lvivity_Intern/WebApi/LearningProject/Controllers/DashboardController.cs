@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LearningProject.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
-    [ApiController]
     public class DashboardController : Controller
     {
         [HttpGet]

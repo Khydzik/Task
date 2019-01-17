@@ -2,6 +2,8 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {PostsComponent} from './components/posts/posts.component';
+import {AuthGuardService} from './guards/auth-guard.service';
+import {HideLoginGuardService} from './guards/hide-login-guard.service';
 
 const routes: Routes = [
   {
@@ -11,11 +13,13 @@ const routes: Routes = [
   },
   {
     path: 'posts',
-    component: PostsComponent
+    component: PostsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [HideLoginGuardService]
   },
 ];
 
