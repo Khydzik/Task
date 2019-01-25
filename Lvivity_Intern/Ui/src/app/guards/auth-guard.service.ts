@@ -1,15 +1,32 @@
 import {CanActivate, Router} from '@angular/router';
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {DataSavingService} from '../services/data-saving.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  constructor (private router: Router) {}
+  constructor(
+    private router: Router,
+    private dataSavingService: DataSavingService
+  ) {}
 
-  canActivate(): boolean {
+  canActivate(): Observable<boolean> | boolean {
     if (localStorage.getItem('token')) {
       return true;
     }
 
-    this.router.navigate(['/login']);
+    return this.dataSavingService.isLoggedIn$
+      .pipe(
+        tap(isLoggedIn => {
+          if (isLoggedIn) {
+            return true;
+          }
+
+          this.router.navigate(['/login']);
+
+          return false;
+        })
+      );
   }
 }

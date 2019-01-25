@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "63243e8cfd8d764f6d1fab270d3a1a3dbebf793b"
+    "signature": "d086f438455b3feecec3777f87d2383a785baaf6"
   },
   "compilationOptions": {
     "defines": [
@@ -25,9 +25,10 @@
       "LearningProject/1.0.0": {
         "dependencies": {
           "ForEvolve.AspNetCore.Localization": "1.1.0",
+          "Microsoft.AspNet.Identity.Core": "2.2.2",
           "Microsoft.AspNet.WebApi": "5.2.7",
-          "Microsoft.AspNet.WebApi.Cors": "5.2.7",
           "Microsoft.AspNetCore.App": "2.2.0",
+          "Microsoft.AspNetCore.Cors": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.AspNetCore.StaticFiles": "2.2.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.1",
@@ -45,8 +46,14 @@
           "de/LearningProject.resources.dll": {
             "locale": "de"
           },
+          "en/LearningProject.resources.dll": {
+            "locale": "en"
+          },
           "ru/LearningProject.resources.dll": {
             "locale": "ru"
+          },
+          "uk/LearningProject.resources.dll": {
+            "locale": "uk"
           }
         },
         "compile": {
@@ -86,15 +93,15 @@
           "lib/netstandard2.0/ForEvolve.AspNetCore.Localization.dll": {}
         }
       },
-      "Microsoft.AspNet.Cors/5.2.7": {
+      "Microsoft.AspNet.Identity.Core/2.2.2": {
         "runtime": {
-          "lib/net45/System.Web.Cors.dll": {
-            "assemblyVersion": "5.2.7.0",
-            "fileVersion": "5.2.61128.0"
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "0.0.0.0"
           }
         },
         "compile": {
-          "lib/net45/System.Web.Cors.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi/5.2.7": {
@@ -129,21 +136,6 @@
         },
         "compile": {
           "lib/net45/System.Web.Http.dll": {}
-        }
-      },
-      "Microsoft.AspNet.WebApi.Cors/5.2.7": {
-        "dependencies": {
-          "Microsoft.AspNet.Cors": "5.2.7",
-          "Microsoft.AspNet.WebApi.Core": "5.2.7"
-        },
-        "runtime": {
-          "lib/net45/System.Web.Http.Cors.dll": {
-            "assemblyVersion": "5.2.7.0",
-            "fileVersion": "5.2.61128.0"
-          }
-        },
-        "compile": {
-          "lib/net45/System.Web.Http.Cors.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.WebHost/5.2.7": {
@@ -3798,12 +3790,12 @@
       "path": "forevolve.aspnetcore.localization/1.1.0",
       "hashPath": "forevolve.aspnetcore.localization.1.1.0.nupkg.sha512"
     },
-    "Microsoft.AspNet.Cors/5.2.7": {
+    "Microsoft.AspNet.Identity.Core/2.2.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-7UdjFHX6A2LOd197SlHEamULGvigBzLkwJDQNvJ00gdqkQYrETetEj7TvD6Ld+XCSCBJCjH3WRgXeKRrQQ1DCg==",
-      "path": "microsoft.aspnet.cors/5.2.7",
-      "hashPath": "microsoft.aspnet.cors.5.2.7.nupkg.sha512"
+      "sha512": "sha512-DJNnLn/eElAudZqNUsQ8qQy3LlKnlQ/kBjl+Zi6Xvur/InJ6DZYCuTLV5mtNtDZ0egvpl/e/Q8MLlh+3te7tYw==",
+      "path": "microsoft.aspnet.identity.core/2.2.2",
+      "hashPath": "microsoft.aspnet.identity.core.2.2.2.nupkg.sha512"
     },
     "Microsoft.AspNet.WebApi/5.2.7": {
       "type": "package",
@@ -3825,13 +3817,6 @@
       "sha512": "sha512-jh2G5XPV+nlyvNsiUhNORcGnF8GPru7RRCJLisfJktpqv0nrlWK6QjRPUx6rFkFF2B1vqhD9nJHwm+Tat8rNaw==",
       "path": "microsoft.aspnet.webapi.core/5.2.7",
       "hashPath": "microsoft.aspnet.webapi.core.5.2.7.nupkg.sha512"
-    },
-    "Microsoft.AspNet.WebApi.Cors/5.2.7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-OIsARe+KdWIO1532JoY9wAyOrvY7ItYaccjEMO4LAVSPpNzAcCdEnFvR2LaaFztvcQtPOFggaju2+duvuwfj6g==",
-      "path": "microsoft.aspnet.webapi.cors/5.2.7",
-      "hashPath": "microsoft.aspnet.webapi.cors.5.2.7.nupkg.sha512"
     },
     "Microsoft.AspNet.WebApi.WebHost/5.2.7": {
       "type": "package",

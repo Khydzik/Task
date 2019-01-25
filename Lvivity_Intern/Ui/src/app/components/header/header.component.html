@@ -3,18 +3,22 @@
     <div class="user-icon-wrapper">
       <img class="user-icon" src="../../../assets/user-icon.png" alt="user icon">
     </div>
-    <span class="dots-icon-wrapper">
-      <svg class="dots-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612">
-        <circle cx="69.545" cy="528.545" r="69.545"></circle>
-        <circle cx="306" cy="306" r="69.545"></circle>
-        <circle cx="306" cy="83.455" r="69.545"></circle>
-        <circle cx="69.545" cy="83.455" r="69.545"></circle>
-        <circle cx="69.545" cy="306" r="69.545"></circle>
-        <circle cx="306" cy="528.545" r="69.545"></circle>
-        <circle cx="542.454" cy="528.545" r="69.545"></circle>
-        <circle cx="542.454" cy="83.455" r="69.545"></circle>
-        <circle cx="542.454" cy="306" r="69.545"></circle>
-      </svg>
-    </span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a routerLink="/posts" mat-menu-item>
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+      <a *ngIf="isAdmin" routerLink="/users" mat-menu-item>
+        <mat-icon>list</mat-icon>
+        <span>Users</span>
+      </a>
+      <a routerLink="/" (click)="onLogout()" mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Log out</span>
+      </a>
+    </mat-menu>
   </div>
 </header>

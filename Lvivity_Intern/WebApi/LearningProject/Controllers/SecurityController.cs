@@ -9,29 +9,25 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace LearningProject.Controllers
-{
+{     
     [ApiController]
     [Route("api/[controller]")]
-    public class SecurityController : Controller
+    public class SecurityController : ControllerBase
     {
         ApplicationContext db;
-
+ 
         public SecurityController(ApplicationContext context)
         {
-            this.db = context;
-
-            if(!db.Users.Any())
-            {
-                db.Users.Add(new User { UserName = "admin123", Password = "admin1" });
-                db.SaveChanges();
-            }
+            this.db = context;            
         }        
 
         [HttpPost]
-        public async Task Authorization([FromBody] User user)
-        { 
+        public async Task Authorization([FromBody] LoginModel login)
+        {
+            var user = GetUser(login);
             var identity = GetIdentity(user);
 
             if(identity == null)
@@ -51,27 +47,36 @@ namespace LearningProject.Controllers
 
             var response = new
             {
-                access_token = encodedJwt,                
-                username = identity.Name
+                access_token = encodedJwt,
+                username = identity.Name,
+                role = new { name = user.Role.Name },
+                id = user.Id
             };
 
             Response.ContentType = "application/json";
             await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
         }
 
-        private ClaimsIdentity GetIdentity(User data)
+        private User GetUser(LoginModel data)
         {
-            User user = db.Users.FirstOrDefault(x => x.UserName == data.UserName && x.Password == data.Password);
+            User user = db.Users.Include(u => u.Role).FirstOrDefault(x => x.UserName == data.UserName && x.Password == data.Password);
 
-            if(user != null)
+            return user;
+        }
+
+        private ClaimsIdentity GetIdentity(User user)
+        {
+            if (user != null)
             {
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName),
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Password)
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
+                    
                 };
 
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Authorization", ClaimsIdentity.DefaultNameClaimType,ClaimsIdentity.DefaultNameClaimType);
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Authorization", ClaimsIdentity.DefaultNameClaimType,ClaimsIdentity.DefaultRoleClaimType);
+ 
                 return claimsIdentity;
             }
             return null;

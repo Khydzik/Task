@@ -33,13 +33,13 @@
           }
         }
       },
-      "Microsoft.AspNet.Cors/5.2.7": {
+      "Microsoft.AspNet.Identity.Core/2.2.2": {
         "type": "package",
         "compile": {
-          "lib/net45/System.Web.Cors.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
         },
         "runtime": {
-          "lib/net45/System.Web.Cors.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi/5.2.7": {
@@ -71,19 +71,6 @@
         },
         "runtime": {
           "lib/net45/System.Web.Http.dll": {}
-        }
-      },
-      "Microsoft.AspNet.WebApi.Cors/5.2.7": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Cors": "5.2.7",
-          "Microsoft.AspNet.WebApi.Core": "[5.2.7, 5.3.0)"
-        },
-        "compile": {
-          "lib/net45/System.Web.Http.Cors.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Web.Http.Cors.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.WebHost/5.2.7": {
@@ -4921,16 +4908,17 @@
         "lib/netstandard2.0/pt/ForEvolve.AspNetCore.Localization.resources.dll"
       ]
     },
-    "Microsoft.AspNet.Cors/5.2.7": {
-      "sha512": "7UdjFHX6A2LOd197SlHEamULGvigBzLkwJDQNvJ00gdqkQYrETetEj7TvD6Ld+XCSCBJCjH3WRgXeKRrQQ1DCg==",
+    "Microsoft.AspNet.Identity.Core/2.2.2": {
+      "sha512": "DJNnLn/eElAudZqNUsQ8qQy3LlKnlQ/kBjl+Zi6Xvur/InJ6DZYCuTLV5mtNtDZ0egvpl/e/Q8MLlh+3te7tYw==",
       "type": "package",
-      "path": "microsoft.aspnet.cors/5.2.7",
+      "path": "microsoft.aspnet.identity.core/2.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/net45/System.Web.Cors.dll",
-        "microsoft.aspnet.cors.5.2.7.nupkg.sha512",
-        "microsoft.aspnet.cors.nuspec"
+        "lib/net45/Microsoft.AspNet.Identity.Core.dll",
+        "lib/net45/Microsoft.AspNet.Identity.Core.xml",
+        "microsoft.aspnet.identity.core.2.2.2.nupkg.sha512",
+        "microsoft.aspnet.identity.core.nuspec"
       ]
     },
     "Microsoft.AspNet.WebApi/5.2.7": {
@@ -4973,19 +4961,6 @@
         "lib/net45/System.Web.Http.xml",
         "microsoft.aspnet.webapi.core.5.2.7.nupkg.sha512",
         "microsoft.aspnet.webapi.core.nuspec"
-      ]
-    },
-    "Microsoft.AspNet.WebApi.Cors/5.2.7": {
-      "sha512": "OIsARe+KdWIO1532JoY9wAyOrvY7ItYaccjEMO4LAVSPpNzAcCdEnFvR2LaaFztvcQtPOFggaju2+duvuwfj6g==",
-      "type": "package",
-      "path": "microsoft.aspnet.webapi.cors/5.2.7",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net45/System.Web.Http.Cors.dll",
-        "lib/net45/System.Web.Http.Cors.xml",
-        "microsoft.aspnet.webapi.cors.5.2.7.nupkg.sha512",
-        "microsoft.aspnet.webapi.cors.nuspec"
       ]
     },
     "Microsoft.AspNet.WebApi.WebHost/5.2.7": {
@@ -13307,9 +13282,10 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "ForEvolve.AspNetCore.Localization >= 1.1.0",
+      "Microsoft.AspNet.Identity.Core >= 2.2.2",
       "Microsoft.AspNet.WebApi >= 5.2.7",
-      "Microsoft.AspNet.WebApi.Cors >= 5.2.7",
       "Microsoft.AspNetCore.App >= 2.2.0",
+      "Microsoft.AspNetCore.Cors >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.AspNetCore.StaticFiles >= 2.2.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.2.1",
@@ -13328,11 +13304,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Lvivity_Intern\\WebApi\\LearningProject\\LearningProject.csproj",
+      "projectUniqueName": "C:\\Task\\Lvivity_Intern\\WebApi\\LearningProject\\LearningProject.csproj",
       "projectName": "LearningProject",
-      "projectPath": "C:\\Lvivity_Intern\\WebApi\\LearningProject\\LearningProject.csproj",
+      "projectPath": "C:\\Task\\Lvivity_Intern\\WebApi\\LearningProject\\LearningProject.csproj",
       "packagesPath": "C:\\Users\\Volodya Khydzik\\.nuget\\packages\\",
-      "outputPath": "C:\\Lvivity_Intern\\WebApi\\LearningProject\\obj\\",
+      "outputPath": "C:\\Task\\Lvivity_Intern\\WebApi\\LearningProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13366,11 +13342,11 @@
             "target": "Package",
             "version": "[1.1.0, )"
           },
-          "Microsoft.AspNet.WebApi": {
+          "Microsoft.AspNet.Identity.Core": {
             "target": "Package",
-            "version": "[5.2.7, )"
+            "version": "[2.2.2, )"
           },
-          "Microsoft.AspNet.WebApi.Cors": {
+          "Microsoft.AspNet.WebApi": {
             "target": "Package",
             "version": "[5.2.7, )"
           },
@@ -13379,6 +13355,10 @@
             "target": "Package",
             "version": "[2.2.0, )",
             "autoReferenced": true
+          },
+          "Microsoft.AspNetCore.Cors": {
+            "target": "Package",
+            "version": "[2.2.0, )"
           },
           "Microsoft.AspNetCore.Razor.Design": {
             "suppressParent": "All",
@@ -13435,8 +13415,8 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Cors 5.2.7' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.2'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.Cors",
+      "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.2' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.2'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Identity.Core",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.2"
       ]
@@ -13447,16 +13427,6 @@
       "warningLevel": 1,
       "message": "Package 'Microsoft.AspNet.WebApi.Core 5.2.7' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.2'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.AspNet.WebApi.Core",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.2"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebApi.Cors 5.2.7' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.2'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.WebApi.Cors",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.2"
       ]

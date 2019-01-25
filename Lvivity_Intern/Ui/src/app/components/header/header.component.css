@@ -1,10 +1,11 @@
 .header {
   height: 50px;
-  color: #ccc;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
+  color: #ccc;
+  background-color: #fff;
 }
 
 .header-icons {
@@ -20,10 +21,6 @@
   cursor: pointer;
 }
 
-.dots-icon {
-  margin-top: 4px;
-  width: 14px;
-  height: 14px;
-  fill: #7D7D7D;;
-  cursor: pointer;
+mat-icon {
+  color: #7D7D7D;
 }

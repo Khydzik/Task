@@ -10,7 +10,7 @@ namespace LearningProject.Controllers
     {
         [HttpGet]
         public List<Post> GetPosts()
-        {
+      {
             List<Post> posts = new List<Post>
             {
                 new Post{Title = "News1" , ImageUrl =
@@ -29,5 +29,8 @@ namespace LearningProject.Controllers
             };
             return posts;
         }
+
+        
+
     }
 }

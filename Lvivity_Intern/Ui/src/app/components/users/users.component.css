@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  height: calc(100% - 50px);
+}
+
+mat-list {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.users-header {
+  margin: 0;
+  text-align: center;
+}
+
+.role-change-btn {
+  min-width: initial;
+}

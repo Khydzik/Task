@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Localization;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 
@@ -21,11 +20,10 @@ namespace LearningProject
         }
 
         public void ConfigureServices(IServiceCollection services)
-        { 
+        {
             services.AddLocalization(o => o.ResourcesPath = "Resources");
-            services.AddMvc().AddDataAnnotationsLocalization().AddViewLocalization();      
- 
-            services.AddCors();           
+            services.AddCors();
+            services.AddMvc().AddDataAnnotationsLocalization().AddViewLocalization();            
 
             services.AddSwaggerGen(c =>
             {
@@ -49,8 +47,7 @@ namespace LearningProject
                     IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
                     ValidateIssuerSigningKey = true
                 };
-            });
-            services.AddLogging();            
+            });            
         }
 
         public void Configure(IApplicationBuilder app)
@@ -68,14 +65,12 @@ namespace LearningProject
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures
             });
-
-
+            
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseCors(buidler => buidler.WithOrigins("*").AllowAnyHeader());
- 
-            app.UseSwagger();
-            
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            app.UseSwagger(); 
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Api V1");
