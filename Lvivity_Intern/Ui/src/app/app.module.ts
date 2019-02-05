@@ -1,39 +1,49 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { ToastrModule } from 'ngx-toastr';
+import { AngularMaterialModule } from './angular-material.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
+  MatGridListModule,
+  MatListModule,
   MatIconModule,
   MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatProgressSpinnerModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTableModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSelectModule
 } from '@angular/material';
-import { ToastrModule } from 'ngx-toastr';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { HeaderComponent } from './components/header/header.component';
-import { HideLoginGuardService } from './guards/hide-login-guard.service';
-import { AuthGuardService } from './guards/auth-guard.service';
 import { RegisterComponent } from './components/register/register.component';
-import { RoleGuardService } from './guards/role-guard.service';
 import { UsersComponent } from './components/users/users.component';
+import { CreatePostComponent } from './components/createPost/createPost.component';
+
+
+
+
+import { AuthInterceptor } from './auth-interceptor';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
+    AppComponent,
     AppComponent,
     LoginComponent,
     PostsComponent,
     HeaderComponent,
     RegisterComponent,
-    UsersComponent
+    UsersComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
@@ -41,21 +51,27 @@ import { UsersComponent } from './components/users/users.component';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatCardModule,
+    ToastrModule.forRoot(),
+    AngularMaterialModule,
+    NgxSpinnerModule,
+    ReactiveFormsModule,   
+
+
     MatButtonModule,
+    MatCardModule,
+    MatGridListModule,
+    MatListModule,
+    MatIconModule,
     MatInputModule,
     MatToolbarModule,
-    MatMenuModule,
-    MatIconModule,
-    MatListModule,
-    MatProgressSpinnerModule,
-    ToastrModule.forRoot(),
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
   ],
-  providers: [
-    HideLoginGuardService,
-    RoleGuardService,
-    AuthGuardService
-  ],
+  providers: [ 
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ], 
   bootstrap: [AppComponent]
 })
 export class AppModule {

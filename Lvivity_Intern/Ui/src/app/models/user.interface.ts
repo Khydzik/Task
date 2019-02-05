@@ -1,7 +1,6 @@
-import {Role} from '../models/role.interface';
-
+import { Role } from '../models/role.interface';
 export interface User {
-  id: string;
+  id: number;
   userName: string;
   role: Role;
 }

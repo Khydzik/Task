@@ -1,7 +1,4 @@
-<div *ngIf="isLoading" class="spinner">
-  <mat-spinner></mat-spinner>
-</div>
-<mat-list *ngIf="!isLoading">
+<mat-list *ngIf="users.length">
   <h2 class="users-header">Users</h2>
   <mat-list-item *ngFor="let user of users">
     <mat-icon matListIcon>person</mat-icon>
@@ -10,7 +7,22 @@
     <button
       class="role-change-btn"
       mat-raised-button
-      (click)="changeUserRole(user.id, {name: user.role === 'admin' ? 'user' : 'admin' })"
-      color="primary">Change role</button>
+      (click)="changeUserRole(user.id,  {name: user.role.name === 'admin' ? 'user' : 'admin' })"
+      color="primary">Change Role</button>
   </mat-list-item>
 </mat-list>
+<p *ngIf="!users.length" class="info-text mat-body-1">No users added yet</p>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<mat-paginator
+  *ngIf="users.length"
+  [length]="totalUsers"
+  [pageSize]="usersPerPage"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onChangedPage($event)">
+</mat-paginator>

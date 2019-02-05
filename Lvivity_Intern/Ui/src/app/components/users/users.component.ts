@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService} from '../../services/api.service';
-import {User} from '../../models/user.interface';
-import {ShowToastrService} from '../../services/show-toastr.service';
-import {Role} from '../../models/role.interface';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user.interface';
+import { Role } from '../../models/role.interface';
+import { PageEvent } from '@angular/material';
+import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-users',
@@ -10,40 +12,46 @@ import {Role} from '../../models/role.interface';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  isLoading = false;
   users: User[] = [];
+  totalUsers = 0;
+  perPage = 2;
+  currentPage = 1;
+  pageSizeOptions = [1, 2, 5, 10];
+  private usersSub: Subscription;
 
   constructor(
-    private apiService: ApiService,
-    private toastr: ShowToastrService,
+    private authService: AuthService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
-    this.isLoading = true;
-    this.apiService.getUsers()
-      .subscribe((users: User[]) => {
-        this.isLoading = false;
-        this.users = users;
-      });
+    this.getUsers();
   }
 
-  changeUserRole (id: string, role: Role) {
-    this.isLoading = true;
-    this.apiService.changeUserRole(id, role)
-      .then((newRole: Role) => {
-        this.isLoading = false;
-        const newUsers = [...this.users];
-        const oldUserIndex: number = newUsers.findIndex(user => user.id === id);
-        const oldUser: User = newUsers[oldUserIndex];
-        newUsers[oldUserIndex] = {
-          ...oldUser,
-          role: newRole
-        };
-        this.users = newUsers;
-        this.toastr.showSuccess('Роль змінено!');
-      })
-      .catch(err => {
-        this.toastr.showError('Виникли проблеми з зміною ролі!', err);
-      });
+  getUsers() {
+    this.spinner.show();
+    this.authService.getUsers(this.perPage, this.currentPage);
+    this.usersSub = this.authService.getUsersUpdateListener()
+      .subscribe(
+        (users: User[]) => {
+          this.spinner.hide();
+          this.users = users;
+          this.totalUsers = this.users.length;
+        }
+      );
+  }
+
+  changeUserRole (id: number, role: Role) {
+    this.spinner.show();
+    console.log(id,role);
+    this.authService.changeUserRole(id, role);
+    this.authService.getUsers(this.perPage, this.currentPage);
+  }
+
+  onChangedPage (pageData: PageEvent) {
+    this.spinner.show();
+    this.currentPage = pageData.pageIndex + 1;
+    this.perPage = pageData.pageSize;
+    this.authService.getUsers(this.perPage, this.currentPage);
   }
 }

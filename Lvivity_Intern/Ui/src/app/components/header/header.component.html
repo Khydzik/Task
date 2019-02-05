@@ -1,15 +1,25 @@
 <header class="header">
   <div class="header-icons">
-    <div class="user-icon-wrapper">
+    <div *ngIf="isAuthenticated" class="user-icon-wrapper">
       <img class="user-icon" src="../../../assets/user-icon.png" alt="user icon">
     </div>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+    <a *ngIf="!isAuthenticated" routerLink="/login" mat-menu-item>
+      <span>Login</span>
+    </a>
+    <a *ngIf="!isAuthenticated" routerLink="/register" mat-menu-item>
+      <span>Register</span>
+    </a>
+    <button *ngIf="isAuthenticated" mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <a routerLink="/posts" mat-menu-item>
         <mat-icon>dashboard</mat-icon>
         <span>Dashboard</span>
+      </a>
+      <a routerLink="/createPost" mat-menu-item>
+        <mat-icon>dashboard</mat-icon>
+        <span>Create Post</span>
       </a>
       <a *ngIf="isAdmin" routerLink="/users" mat-menu-item>
         <mat-icon>list</mat-icon>

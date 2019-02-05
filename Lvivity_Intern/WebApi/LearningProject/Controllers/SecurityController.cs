@@ -12,30 +12,29 @@ using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 
 namespace LearningProject.Controllers
-{     
+{
     [ApiController]
     [Route("api/[controller]")]
     public class SecurityController : ControllerBase
     {
+        public const int ValidationError = 3;
         ApplicationContext db;
  
         public SecurityController(ApplicationContext context)
         {
-            this.db = context;            
+            this.db = context;
         }        
 
         [HttpPost]
-        public async Task Authorization([FromBody] LoginModel login)
+        public async Task<object> Authorization([FromBody] LoginModel login)
         {
             var user = GetUser(login);
             var identity = GetIdentity(user);
 
-            if(identity == null)
+            if (identity == null)
             {
-                Response.StatusCode = 400;
-                await Response.WriteAsync("Invalid username or password");
-                return;
-            }
+                throw new Exception("Invalid username or password");
+            }  
 
             var now = DateTime.UtcNow;
 
@@ -47,14 +46,13 @@ namespace LearningProject.Controllers
 
             var response = new
             {
-                access_token = encodedJwt,
+                id = user.Id,
                 username = identity.Name,
-                role = new { name = user.Role.Name },
-                id = user.Id
+                access_token = encodedJwt,                
+                role = new { name = user.Role.Name }                
             };
 
-            Response.ContentType = "application/json";
-            await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
+            return response;
         }
 
         private User GetUser(LoginModel data)

@@ -1,8 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subject, Subscription} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {DataSavingService} from '../../services/data-saving.service';
-import {User} from '../../models/user.interface';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,28 +8,35 @@ import {User} from '../../models/user.interface';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  authUser: User;
+  isAuthenticated = false;
   isAdmin = false;
-  authUserSub: Subscription;
+  private authStatusSub: Subscription;
 
-  constructor(private dataSavingService: DataSavingService) {}
+  constructor (private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.authUserSub = this.dataSavingService.authUser$
-      .subscribe(res => {
-        this.authUser = res;
+  ngOnInit (): void {
+    this.isAuthenticated = this.authService.getIsAuth();
+    const authUser = this.authService.getAuthUser();
 
-        if (this.authUser) {
-          this.isAdmin = this.authUser.role.name === 'admin';
+    if (authUser) {
+      this.isAdmin = authUser.role.name === 'admin';
+    }
+
+    this.authStatusSub = this.authService.getAuthStatus()
+      .subscribe((isAuth: boolean) => {
+        this.isAuthenticated = isAuth;
+
+        if (this.isAuthenticated) {
+          this.isAdmin = this.authService.getAuthUser().role.name === 'admin';
         }
       });
   }
 
   onLogout () {
-    this.dataSavingService.logout();
+    this.authService.logout();
   }
 
-  ngOnDestroy(): void {
-    this.authUserSub.unsubscribe();
+  ngOnDestroy (): void {
+    this.authStatusSub.unsubscribe();
   }
 }

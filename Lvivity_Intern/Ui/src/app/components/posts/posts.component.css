@@ -1,6 +1,5 @@
 .posts-wrapper {
-  height: calc(100% - 50px);
-  padding-top: 8px;
+  padding: 8px 0;
 }
 
 .posts-header {
@@ -105,4 +104,9 @@
   background-color: #fff;
   font-size: 12px;
   cursor: pointer;
+}
+
+.info-text {
+  margin-top: 15px;
+  text-align: center;
 }

@@ -3,47 +3,43 @@
     <div>Registration</div>
   </mat-toolbar>
   <mat-card>
-    <mat-card-content>
-      <form (ngSubmit)="register(regForm)" #regForm="ngForm" novalidate>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Username"
-            name="userName"
-            ngModel
-            #userName="ngModel"
-            required>
-          <mat-error *ngIf="userName.errors?.required">Username is a required field</mat-error>         
-        </mat-form-field>
-        <mat-error *ngIf="errorMessages.userName">{{errorMessages.userName}}</mat-error>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Password"
-            name="password"
-            ngModel
-            #password="ngModel"
-            required>
-          <mat-error *ngIf="password.errors?.required">Password is a required field</mat-error>          
-        </mat-form-field>
-        <mat-error *ngIf="errorMessages.password">{{errorMessages.password}}</mat-error>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Confirm Password"
-            name="confirmPassword"
-            ngModel
-            #confirmPassword="ngModel"
-            required>
-          <mat-error *ngIf="confirmPassword.errors?.required">Confirm Password is a required field</mat-error>          
-        </mat-form-field>
-        <mat-error *ngIf="errorMessages.confirmPassword">{{errorMessages.confirmPassword}}</mat-error>
-        <mat-error *ngIf="errorMessages.userExist">{{errorMessages.userExist}}</mat-error>
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit">REGISTER</button>
-      </form>
-    </mat-card-content>
+    <form (ngSubmit)="register(regForm)" #regForm="ngForm" novalidate>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Username"
+          name="userName"
+          ngModel
+          #userName="ngModel"
+          required>
+        <mat-error *ngIf="userName.errors?.required">Username is a required field</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Password"
+          name="password"
+          type="password"
+          ngModel
+          #password="ngModel"
+          required>
+        <mat-error *ngIf="password.errors?.required">Password is a required field</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Confirm Password"
+          name="confirmPassword"
+          type="password"
+          ngModel
+          #confirmPassword="ngModel"
+          required>
+        <mat-error *ngIf="confirmPassword.errors?.required">Confirm Password is a required field</mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit">REGISTER</button>
+    </form>
   </mat-card>
 </div>

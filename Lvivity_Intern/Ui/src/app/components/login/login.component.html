@@ -3,37 +3,32 @@
     <div>Login</div>
   </mat-toolbar>
   <mat-card>
-    <mat-card-content>
-      <form (ngSubmit)="login(loginForm)" #loginForm="ngForm" novalidate>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Username"
-            name="userName"
-            ngModel
-            #userName="ngModel"
-            required>
-          <mat-error *ngIf="userName.errors?.required">Username is a required field</mat-error>          
-        </mat-form-field>
-        <mat-error *ngIf="errorMessages.userName">{{errorMessages.userName}}</mat-error>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Password"
-            name="password"
-            ngModel
-            #password="ngModel"
-            required>
-          <mat-error *ngIf="password.errors?.required">Password is a required field</mat-error>         
-        </mat-form-field>
-        <mat-error *ngIf="errorMessages.password">{{errorMessages.password}}</mat-error>
-        <mat-error *ngIf="errorMessages.notFound">{{errorMessages.notFound}}</mat-error>
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit">LOGIN</button>
-      </form>      
-    </mat-card-content>
-    <a class="password" href="http://localhost:4200/register">Registration</a>
+    <form (ngSubmit)="login(loginForm)" #loginForm="ngForm" novalidate>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Username"
+          name="userName"
+          ngModel
+          #userName="ngModel"
+          required>
+        <mat-error *ngIf="userName.errors?.required">Username is a required field</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Password"
+          name="password"
+          type="password"
+          ngModel
+          #password="ngModel"
+          required>
+        <mat-error *ngIf="password.errors?.required">Password is a required field</mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit">LOGIN</button>
+    </form>
   </mat-card>
 </div>

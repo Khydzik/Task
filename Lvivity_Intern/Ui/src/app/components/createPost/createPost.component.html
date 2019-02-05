@@ -1,0 +1,26 @@
+<div class="form-wrapper">
+  <mat-toolbar>
+    <div>Create Post</div>
+  </mat-toolbar>
+  <mat-card>
+      <form class="user-form" [formGroup]="postForm" (ngSubmit)="onSubmit()" novalidate>
+        <mat-form-field class="user-controls-full-width">
+          <input
+            matInput
+            placeholder="Title"
+            formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Short Description"
+            formControlName="shortDescription">    
+        </mat-form-field>
+        <input type="file"  id="file" class="inputfile" #uploader (change)="addPhoto($event)">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit">Create</button>
+      </form>
+  </mat-card>
+</div> 

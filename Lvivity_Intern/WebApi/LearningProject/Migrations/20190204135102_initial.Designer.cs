@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LearningProject.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190124151919_initial")]
+    [Migration("20190204135102_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,6 +72,23 @@ namespace LearningProject.Migrations
                             RoleId = 1,
                             UserName = "admin"
                         });
+                });
+
+            modelBuilder.Entity("LearningProject.Post", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<string>("ShortDescription");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("LearningProject.Models.User", b =>

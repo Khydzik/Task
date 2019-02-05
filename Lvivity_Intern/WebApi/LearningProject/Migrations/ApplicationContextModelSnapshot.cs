@@ -72,6 +72,23 @@ namespace LearningProject.Migrations
                         });
                 });
 
+            modelBuilder.Entity("LearningProject.Post", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<string>("ShortDescription");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Posts");
+                });
+
             modelBuilder.Entity("LearningProject.Models.User", b =>
                 {
                     b.HasOne("LearningProject.Models.Role", "Role")

@@ -1,18 +1,6 @@
-:host {
-  display: block;
-  height: calc(100% - 50px);
-}
-
 mat-list {
   width: 40%;
   margin: 0 auto;
-}
-
-.spinner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
 }
 
 .users-header {
@@ -22,4 +10,9 @@ mat-list {
 
 .role-change-btn {
   min-width: initial;
+}
+
+.info-text {
+  margin-top: 15px;
+  text-align: center;
 }
