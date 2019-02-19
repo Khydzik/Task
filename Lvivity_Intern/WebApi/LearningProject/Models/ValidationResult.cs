@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace LearningProject.Models
+namespace LearningProject.Web.Models
 {
     public class ValidationResult : IActionResult
     {
@@ -26,7 +26,7 @@ namespace LearningProject.Models
                 }                
             }
 
-            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            context.HttpContext.Response.StatusCode = 400;
             var responce = new Responce<object>
             {
                 Result = null,
@@ -35,7 +35,7 @@ namespace LearningProject.Models
                     Message = errors.FirstOrDefault()
                 }
             };
-
+            
             context.HttpContext.Response.ContentType = "application/json";
             await context.HttpContext.Response.WriteAsync(JsonConvert.SerializeObject(responce,new JsonSerializerSettings { Formatting  = Formatting.Indented }));
         }

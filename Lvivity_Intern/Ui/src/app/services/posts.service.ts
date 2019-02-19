@@ -5,7 +5,7 @@ import { Post } from '../models/post.interface';
 import { ShowToastrService } from './show-toastr.service';
 import { map } from 'rxjs/operators';
 
-const API_URL = 'http://localhost:5000/api/';
+const API_URL = 'http://localhost/api/';
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +21,14 @@ export class PostsService {
 
   getPosts(perPage: number, currentPage: number): void {
     this.http.post<{
-      result: {
-        post: Post[]
-      },
+      result: Post[],
       error: { message: string }
-    }>(API_URL + 'Dashboard', { perPage, currentPage })
+    }>(API_URL + 'Post', { perPage, currentPage })
       .pipe(map(res => {
         if (res.error) {
           throwError(res.error);
         } else {
-          return res.result.post;
+          return res.result;
         }
       }))
       .subscribe(

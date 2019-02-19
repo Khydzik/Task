@@ -1,4 +1,4 @@
-﻿using LearningProject.Models;
+﻿using LearningProject.Web.Models;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -8,7 +8,7 @@ using System;
 using System.Threading.Tasks;
  
 
-namespace LearningProject
+namespace LearningProject.Web
 {
     public class Program
     {

@@ -5,7 +5,7 @@ using Newtonsoft.Json.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearningProject
+namespace LearningProject.Web
 {
     public static class HttpExtension
     {

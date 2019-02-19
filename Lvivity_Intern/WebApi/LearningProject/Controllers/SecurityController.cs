@@ -1,40 +1,31 @@
-﻿using LearningProject.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using Microsoft.EntityFrameworkCore;
+using LearningProject.Application;
+using LearningProject.Data.Models;
+using LearningProject.Web.Models;
+using System.Threading.Tasks;
 
-namespace LearningProject.Controllers
+namespace LearningProject.Web.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class SecurityController : ControllerBase
     {
-        public const int ValidationError = 3;
-        ApplicationContext db;
- 
-        public SecurityController(ApplicationContext context)
+        private readonly IUserService _objUserService;
+
+        public SecurityController(IUserService userService)
         {
-            this.db = context;
-        }        
+            _objUserService = userService;
+        }
 
         [HttpPost]
-        public async Task<object> Authorization([FromBody] LoginModel login)
+        public async Task<ResponseLogin<Role>> Authorization([FromBody] LoginModel login)
         {
-            var user = GetUser(login);
-            var identity = GetIdentity(user);
+            var user = await _objUserService.GetUser(login);
 
-            if (identity == null)
-            {
-                throw new Exception("Invalid username or password");
-            }  
+            var identity = _objUserService.GetIdentity(user);
 
             var now = DateTime.UtcNow;
 
@@ -44,40 +35,15 @@ namespace LearningProject.Controllers
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-            var response = new
+            var response = new ResponseLogin<Role>
             {
-                id = user.Id,
-                username = identity.Name,
-                access_token = encodedJwt,                
-                role = new { name = user.Role.Name }                
+                Id = user.Id,
+                Username = identity.Name,
+                Access_token = encodedJwt,
+                Role = new Role { Name = user.Role.Name }
             };
 
             return response;
-        }
-
-        private User GetUser(LoginModel data)
-        {
-            User user = db.Users.Include(u => u.Role).FirstOrDefault(x => x.UserName == data.UserName && x.Password == data.Password);
-
-            return user;
-        }
-
-        private ClaimsIdentity GetIdentity(User user)
-        {
-            if (user != null)
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
-                    
-                };
-
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Authorization", ClaimsIdentity.DefaultNameClaimType,ClaimsIdentity.DefaultRoleClaimType);
- 
-                return claimsIdentity;
-            }
-            return null;
         }
     }
 }

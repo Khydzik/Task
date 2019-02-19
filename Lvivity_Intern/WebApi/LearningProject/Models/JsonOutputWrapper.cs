@@ -1,10 +1,10 @@
-﻿using LearningProject.Models;
+﻿using LearningProject.Web.Models;
 
-namespace LearningProject
+namespace LearningProject.Web.Models
 {
     public class JsonOutputWrapper<T>
     {
-        public object Result { get; set; }
+        public T Result { get; set; }
 
         public Error Error { get; set; }
     }

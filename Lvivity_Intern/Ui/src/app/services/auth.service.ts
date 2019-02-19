@@ -10,7 +10,7 @@ import { ShowToastrService } from './show-toastr.service';
 import { map } from 'rxjs/operators';
 import { CreatePost } from '../models/createPost.interface';
 
-const API_URL = 'http://localhost:5000/api/';
+const API_URL = 'http://localhost/api/';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -66,7 +66,7 @@ export class AuthService {
   }
   
   upload(formData:FormData){
-    this.http.post<CreatePost>(API_URL + 'CreateNewPost', formData).subscribe(
+    this.http.post<CreatePost>(API_URL + 'CreatePost', formData).subscribe(
       () => {
         this.toastr.showSuccess('Create successful, now you can see post');
         this.router.navigate(['/posts']);
@@ -120,15 +120,13 @@ export class AuthService {
   
   getUsers(perPage: number, currentPage: number): void {
     this.http.post<{
-      result: {
-        user: User[]
-      },
+      result: User[],
       error: { message: string }
     }>(API_URL + 'User', { perPage, currentPage }) .pipe(map(res => {
       if (res.error) {
         throwError(res.error);
       } else {
-        return res.result.user;
+        return res.result;
       }
     }))
       .subscribe(users => {

@@ -16,7 +16,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   totalPosts = 0;
   perPage = 2;
   currentPage = 1;
-  url = "http://localhost:5000/Posts/";
+  url = "http://localhost/Posts/";
   pageSizeOptions = [1, 2, 5, 10];
   private postsSub: Subscription;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LearningProject.Models
+namespace LearningProject.Web.Models
 {
     public class Error
     {

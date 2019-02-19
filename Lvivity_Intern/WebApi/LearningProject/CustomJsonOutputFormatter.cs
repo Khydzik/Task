@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Formatters;
+﻿using LearningProject.Web.Models;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Buffers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearningProject
+namespace LearningProject.Web
 {
     public class CustomJsonOutputFormatter : JsonOutputFormatter
     {

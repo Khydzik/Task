@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LearningProject.Models
+namespace LearningProject.Web.Models
 {
     public class Responce<T>
     {
