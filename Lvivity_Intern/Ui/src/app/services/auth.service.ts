@@ -10,14 +10,18 @@ import { ShowToastrService } from './show-toastr.service';
 import { map } from 'rxjs/operators';
 import { CreatePost } from '../models/createPost.interface';
 
-const API_URL = 'http://localhost/api/';
+const API_URL = 'http://localhost:5000/api/';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private users: User[] = [];
   private isAuthenticated = false;
   private token: string;
-  private authUser: User;
+  private authUser: {
+    id:number,
+    userName:string,
+    role:string
+  };
   private authStatusSource = new Subject<boolean>();
   private usersUpdated = new Subject<User[]>();
 
@@ -52,13 +56,15 @@ export class AuthService {
   }
 
   doRegister(formData: RegData): void {
-    this.http.post(API_URL + 'Register', formData)
+    this.http.post(API_URL + 'Registration', formData)
       .subscribe(
-        () => {
+        (data) =>  {
+            console.log(data)          
           this.toastr.showSuccess('Registration successful, now you can log in');
           this.router.navigate(['/login']);
         },
         err => {
+          console.log(err);
           this.toastr.showError(err.error.Error.Message, err);
           this.authStatusSource.next(false);
         }
@@ -90,12 +96,12 @@ export class AuthService {
           result: {
             id: number,
             username: string,
-            access_token: string,
-            role: { name: string }
+            token: string,
+            role:  string 
           },
           error: { message: string }
         }) => {
-          const token = res.result.access_token;
+          const token = res.result.token;
           this.token = token;
 
           if (token) {
@@ -118,11 +124,11 @@ export class AuthService {
       );
   }
   
-  getUsers(perPage: number, currentPage: number): void {
+  getUsers(take: number, skip: number): void {
     this.http.post<{
       result: User[],
       error: { message: string }
-    }>(API_URL + 'User', { perPage, currentPage }) .pipe(map(res => {
+    }>(API_URL + 'User', { take, skip }) .pipe(map(res => {
       if (res.error) {
         throwError(res.error);
       } else {
@@ -131,6 +137,7 @@ export class AuthService {
     }))
       .subscribe(users => {
         this.users = users;
+        console.log(users);
         this.usersUpdated.next([...this.users]);
       }, err => {
         this.toastr.showError(err.message, err);
@@ -138,16 +145,16 @@ export class AuthService {
       });
   }
 
-  changeUserRole(id: number, role: Role): void {
-    this.http.patch(API_URL + 'Edit', { id, role })
+  changeUserRole(userId: number, roleId: number): void {
+    this.http.patch(API_URL + 'UserEdit', { userId, roleId })
       .subscribe(
-        (result: { name: Role }) => {
+        (result: { role: Role }) => {
           const oldUsers = [...this.users];
-          const oldUserIndex: number = oldUsers.findIndex(user => user.id === id);
+          const oldUserIndex: number = oldUsers.findIndex(user => user.id === userId);
           const oldUser: User = oldUsers[oldUserIndex];
           oldUsers[oldUserIndex] = {
             ...oldUser,
-          role: result.name
+          role: result.role
           };
           this.users = oldUsers;
         }
@@ -176,7 +183,7 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
-  private saveAuthData(token: string, authUser: User) {
+  private saveAuthData(token: string, authUser: object) {
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(authUser));
   }

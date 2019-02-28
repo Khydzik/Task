@@ -34,6 +34,7 @@ export class UsersComponent implements OnInit {
     this.usersSub = this.authService.getUsersUpdateListener()
       .subscribe(
         (users: User[]) => {
+          console.log(users);
           this.spinner.hide();
           this.users = users;
           this.totalUsers = this.users.length;
@@ -41,10 +42,10 @@ export class UsersComponent implements OnInit {
       );
   }
 
-  changeUserRole (id: number, role: Role) {
+  changeUserRole (id: number, role: number) {
     this.spinner.show();
-    console.log(id,role);
-    this.authService.changeUserRole(id, role);
+    const roleId = role === 1 ? 2 : 1; 
+    this.authService.changeUserRole(id, roleId);
     this.authService.getUsers(this.perPage, this.currentPage);
   }
 

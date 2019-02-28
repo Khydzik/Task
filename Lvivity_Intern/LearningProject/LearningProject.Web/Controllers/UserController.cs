@@ -10,23 +10,24 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace LearningProject.Web.Controllers
 {
-
     [Authorize(Roles = "admin")]
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : Controller
+    public class UserController : ControllerBase
     {
-        private readonly IUserService _objUserService;
+        private readonly IUserService _userService;
 
         public UserController(IUserService userService)
         {
-            _objUserService = userService;
+            _userService = userService;
         }
 
         [HttpPost]
         public async Task<List<User>> GetUsers([FromBody] PaginationModel paginationModel)
         {
-            var users = await _objUserService.GetUsersItem(paginationModel);
+            var users = await _userService.GetUsersItem(paginationModel.Skip, paginationModel.Take);
+
+            if(users == null) { throw new Exception("No users."); }
 
             return users;
         }       

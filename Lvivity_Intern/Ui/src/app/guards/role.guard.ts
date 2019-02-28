@@ -15,7 +15,7 @@ export class RoleGuard implements CanActivate {
   ): boolean {
     const authUser = this.authService.getAuthUser();
 
-    if (authUser && authUser.role.name === 'admin') {
+    if (authUser && authUser.role === 'admin') {
       return true;
     }
 

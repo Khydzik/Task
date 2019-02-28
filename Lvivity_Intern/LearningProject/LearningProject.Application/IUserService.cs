@@ -7,10 +7,9 @@ namespace LearningProject.Application
 {
     public interface IUserService
     {
-        Task<User> GetUser(string username, string password);
+        Task<User> GetUser(string username);
         Task<User> CreateUser(string username, string password);
         Task<Role> ChangeUserRole(int userId, int roleId);
-        Task<List<User>> GetUsersItem(PaginationModel paginationModel);
-        ClaimsIdentity GetIdentity(User user);
+        Task<List<User>> GetUsersItem(int skip, int take);
     }
 }

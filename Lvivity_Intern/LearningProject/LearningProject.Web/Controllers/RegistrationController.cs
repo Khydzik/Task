@@ -20,12 +20,7 @@ namespace LearningProject.Web.Controllers
         [HttpPost]
         public async Task<User> Registration([FromBody]Register input)
         {
-            var user = await _userService.CreateUser(input.UserName, input.Password);
-
-            if (user == null)
-            {
-                throw new Exception("User not created!");
-            }
+            var user = await _userService.CreateUser(input.UserName, input.Password);          
 
             return user;
         }

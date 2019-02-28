@@ -25,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Posts\Images\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\LearningProject.Application\LearningProject.Application.csproj" />
   </ItemGroup>
 

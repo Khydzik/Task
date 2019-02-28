@@ -33,3 +33,12 @@ E:\Projects\Trainees\Vova\Lvivity_Intern\LearningProject\LearningProject.Data\ob
 E:\Projects\Trainees\Vova\Lvivity_Intern\LearningProject\LearningProject.Data\obj\Debug\netstandard2.0\LearningProject.Data.AssemblyInfo.cs
 E:\Projects\Trainees\Vova\Lvivity_Intern\LearningProject\LearningProject.Data\obj\Debug\netstandard2.0\LearningProject.Data.dll
 E:\Projects\Trainees\Vova\Lvivity_Intern\LearningProject\LearningProject.Data\obj\Debug\netstandard2.0\LearningProject.Data.pdb
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Data\obj\Debug\netstandard2.0\LearningProject.Data.csprojAssemblyReference.cache
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Data\obj\Debug\netstandard2.0\LearningProject.Data.csproj.CoreCompileInputs.cache
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Data\obj\Debug\netstandard2.0\LearningProject.Data.AssemblyInfoInputs.cache
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Data\obj\Debug\netstandard2.0\LearningProject.Data.AssemblyInfo.cs
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Data\obj\Debug\netstandard2.0\LearningProject.Data.dll
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Data\bin\Debug\netstandard2.0\LearningProject.Data.deps.json
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Data\bin\Debug\netstandard2.0\LearningProject.Data.dll
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Data\bin\Debug\netstandard2.0\LearningProject.Data.pdb
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Data\obj\Debug\netstandard2.0\LearningProject.Data.pdb

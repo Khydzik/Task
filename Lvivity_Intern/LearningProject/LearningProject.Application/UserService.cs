@@ -1,79 +1,76 @@
 ﻿using LearningProject.Data;
 using LearningProject.Data.Models;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Security.Claims;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LearningProject.Application
 {
     public class UserService:IUserService
     {
-        private readonly IHostingEnvironment _appHosting;
-        private readonly IUserDataService userDataService;
+        private const string Defaultrole = "user";
+        private readonly IRepository<User> _userRepository;
+        private readonly IRepository<Role> _roleRepository;
 
-        public UserService(IUserDataService dataService, IHostingEnvironment app)
+        public UserService(IRepository<User> userRepository, IRepository<Role> roleRepository)
         {
-            userDataService = dataService;
-            _appHosting = app;
+            _roleRepository = roleRepository;
+            _userRepository = userRepository;
         }
 
-        public UserService(IUserDataService dataService)
+        public async Task<User> GetUser(string username)
         {
-            userDataService = dataService;
+            return await _userRepository.Query().Include(r => r.Role).FirstOrDefaultAsync(user => user.UserName == username);
+        }        
+
+        public async Task<List<User>> GetUsersItem(int skip, int take)
+        {
+            return await _userRepository.Query().Include(r => r.Role).Skip(skip-1).Take(take).ToListAsync();
         }
 
-
-        public async Task<User> GetUser(string username, string password)
+        public async Task<User> CreateUser(string username, string password)
         {
-            return await userDataService.GetUserLogin(data);
-        }
+            User user = await _userRepository.GetAsync(u => u.UserName == username);
 
-        public ClaimsIdentity GetIdentity(User user)
-        {
-            var claims = new List<Claim>
+            if (user != null)
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
+                throw new Exception("Such user exist!");
+            }
+
+            Role role = await _roleRepository.GetAsync(r => r.Name == Defaultrole);
+
+            var newuser = new User
+            {
+                UserName = username,
+                Password = password
             };
 
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Authorization", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            newuser.Role = role;
 
-            return claimsIdentity;
-        }
-
-        public async Task<List<User>> GetUsersItem(PaginationModel paginationModel)
-        {
-            var users = await userDataService.GetListUsers(paginationModel);
-            return users;
-        }
-
-        public async Task<User> IsRegistration(string username, string password)
-        {
-            var register = await userDataService.IsRegistrationData(registerUser);
-
-            return register;
+            return await _userRepository.InsertAsync(newuser);
         }
 
         public async Task<Role> ChangeUserRole(int userId, int roleId)
         {
-            var user = await userDataService.GetUser(userId);
+            User user = await _userRepository.GetAsync(u => u.Id == userId);
 
             if (user == null)
             {
-                throw new NullReferenceException("User not found.");
+                throw new Exception("User not found.");
             }
 
-            var role = userDataService.GetRole(roleId);
+            var role = await _roleRepository.GetAsync(r => r.Id == roleId);
 
             if (role == null)
             {
-                throw new NullReferenceException("Role not found.");
+                throw new Exception("Role not found.");
             }
 
-            await userDataService.SaveRole(user, role);
+            user.RoleId = roleId;
+
+            await _userRepository.UpdateAsync(user);
 
             return role;
         }

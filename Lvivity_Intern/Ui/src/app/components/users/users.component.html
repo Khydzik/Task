@@ -7,7 +7,7 @@
     <button
       class="role-change-btn"
       mat-raised-button
-      (click)="changeUserRole(user.id,  {name: user.role.name === 'admin' ? 'user' : 'admin' })"
+      (click)="changeUserRole(user.id, user.role.id)"
       color="primary">Change Role</button>
   </mat-list-item>
 </mat-list>

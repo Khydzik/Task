@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const authUser = this.authService.getAuthUser();
 
     if (authUser) {
-      this.isAdmin = authUser.role.name === 'admin';
+      this.isAdmin = authUser.role === 'admin';
     }
 
     this.authStatusSub = this.authService.getAuthStatus()
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isAuthenticated = isAuth;
 
         if (this.isAuthenticated) {
-          this.isAdmin = this.authService.getAuthUser().role.name === 'admin';
+        this.isAdmin = this.authService.getAuthUser().role === 'admin';
         }
       });
   }

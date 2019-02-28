@@ -14,9 +14,9 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class PostsComponent implements OnInit, OnDestroy { 
   posts: Post[] = [];
   totalPosts = 0;
-  perPage = 2;
-  currentPage = 1;
-  url = "http://localhost/Posts/";
+  take = 2;
+  skip = 1;
+  url = "http://localhost:5000/Posts/Images/";
   pageSizeOptions = [1, 2, 5, 10];
   private postsSub: Subscription;
 
@@ -28,7 +28,7 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.spinner.show();
-    this.postsService.getPosts(this.perPage, this.currentPage);
+    this.postsService.getPosts(this.take, this.skip);
     this.postsSub = this.postsService.getPostsUpdateListener()
       .subscribe(
         (posts: Post[]) => {
@@ -41,9 +41,9 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   onChangedPage (pageData: PageEvent) {
     this.spinner.show();
-    this.currentPage = pageData.pageIndex + 1;
-    this.perPage = pageData.pageSize;
-    this.postsService.getPosts(this.perPage, this.currentPage);
+    this.skip = pageData.pageIndex + 1;
+    this.take = pageData.pageSize;
+    this.postsService.getPosts(this.take, this.skip);
   }
 
   ngOnDestroy (): void {

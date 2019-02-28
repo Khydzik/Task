@@ -9,66 +9,53 @@ using Microsoft.AspNetCore.Http;
 using LearningProject.Data;
 using Microsoft.AspNetCore.Hosting;
 using System.Threading.Tasks;
+using System.Linq;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace LearningProject.Tests
 {
     [ExcludeFromCodeCoverage]
     public class LearningProjectApplicationPostServiceTest
     {
-        [Fact]
-        public void GetPostsCheckReturnPosts_Test()
-        {
-            var paginationModel = new PaginationModel { CurrentPage = 1, PerPage = 2 };
+        //[Fact]
+        //public async Task GetPostsCheckReturnPosts_Test()
+        //{
+        //    int Skip = 1;
+        //    int Take = 2;
 
-            var mock = new Mock<IPostDataStore>();
+        //    var posts = new List<Post>
+        //    {
+        //        new Post { Id=1, Title="Luxury interior in the design of apartments and houses", ShortDescription ="Designing premium interiors is a rejection of typical planning, finishing and decoration decisions " +
+        //        "in favor of a unique environment that best meets the needs of the customer.", ImageUrl = "i.jpeg"},
+        //        new Post { Id=2, Title="Luxury interior in the design of apartments and houses", ShortDescription ="Designing premium interiors is a rejection of typical planning, finishing and decoration decisions " +
+        //        "in favor of a unique environment that best meets the needs of the customer.", ImageUrl = "i.jpeg"}
+        //    };
 
-            mock.Setup(repo => repo.GetPosts(paginationModel)).Returns(GetTestPosts());
+        //    IQueryable<Post> postsQuery = posts.AsQueryable();
 
-            var postService = new PostService(mock.Object);
+        //    var mock1 = new Mock<IRepository<Post>>();
+        //    var mock2 = new Mock<IHostingEnvironment>();
+            
+        //    mock1.Setup(repo => repo.Query()).Returns(async() => {
+        //      return await posts.Skip(Skip - 1).Take(Take).ToListAsync(postsQuery, new System.Threading.CancellationToken());
+        //    });
 
-            var result = postService.GetPosts(paginationModel);
+        //    var postService = new PostService(mock1.Object,mock2.Object);
 
-            Assert.Equal(2, result.Result.Count);
-        }
+        //    var result = postService.GetPosts(Skip,Take);
 
-        [Fact]
-        public async Task CreateNewPostCheckIsNullNewPost_Test()
-        {
-            CreatePostModel newPostModel = null;
-            var mock = new Mock<IPostDataStore>();
-
-            var postService = new PostService(mock.Object);
-
-            Exception ex = await Assert.ThrowsAsync<NullReferenceException>(() => postService.CreatePost(newPostModel));
-
-            Assert.Equal("Null File", ex.Message);
-        }
-
-        [Fact]
-        public async Task CreateNewPostCheckIsNullFile_Test()
-        {
-            CreatePostModel createPostModel = new CreatePostModel
-            {
-                Title = "Luxury interior in the design of apartments and houses",
-                ShortDescription = "Designing premium interiors is a rejection of typical planning.",
-                Image = null
-            };
-            var mock = new Mock<IPostDataStore>();
-
-            var postService = new PostService(mock.Object);
-
-            Exception ex = await Assert.ThrowsAsync<NullReferenceException>(() => postService.CreatePost(createPostModel));
-
-            Assert.Equal("Empty File", ex.Message);
-        }
+        //    Assert.Equal(2, result.Result.Count);
+        //}
 
         [Fact]
-        public void CreateNewPostCheckReturnTrue_Test()
+        public void CreateNewPostCheckReturnPost_Test()
         {
-            var mock = new Mock<IPostDataStore>();
+            var mock1 = new Mock<IRepository<Post>>();
+            var mock2 = new Mock<IHostingEnvironment>();
             var fileMock = new Mock<IFormFile>();
             var fileName = "i.jpeg";
-
             Post postModel = new Post
             {
                 Id = 4,
@@ -76,29 +63,29 @@ namespace LearningProject.Tests
                 ShortDescription = "Designing premium interiors is a rejection of typical planning.",
                 ImageUrl = "i.jpeg"
             };
+            
 
-            CreatePostModel createPostModel = new CreatePostModel
-            {
-                Title = "Luxury interior in the design of apartments and houses",
-                ShortDescription = "Designing premium interiors is a rejection of typical planning.",
-                Image = fileMock.Object
-            };
+            byte[] imageData = new byte[255];
+
             fileMock.Setup(_ => _.FileName).Returns(fileName);
 
-            mock.Setup(repo => repo.IsSavePost(It.IsAny<Post>())).Returns(async() => { return true; });
+            mock1.Setup(repo => repo.InsertAsync(It.IsAny<Post>())).Returns(async() => { return postModel; });
             
             var webRootPath = "C:\\Task\\Lvivity_Intern\\WebApi\\LearningProject\\wwwroot";
             
-            var postService = new PostService(mock.Object, Mock.Of<IHostingEnvironment>(w => w.WebRootPath == webRootPath));
+            var postService = new PostService(mock1.Object, Mock.Of<IHostingEnvironment>(w => w.WebRootPath == webRootPath));
 
-            var result = postService.CreatePost(createPostModel);
+            var result = postService.CreatePost(postModel.Title,
+                postModel.ShortDescription, postModel.ImageUrl, imageData);
 
-            Assert.True(result.Result);
+            Assert.IsType<Post>(result.Result);
         }
 
         [Fact]
         public async Task CreateNewPostCheckIsTypeOfFile_Test()
         {
+            var mock1 = new Mock<IRepository<Post>>();
+            var mock2 = new Mock<IHostingEnvironment>();
             var fileMock = new Mock<IFormFile>();
             var fileName = "i.txt";
             fileMock.Setup(_ => _.FileName).Returns(fileName);
@@ -109,26 +96,15 @@ namespace LearningProject.Tests
                 ShortDescription = "Designing premium interiors is a rejection of typical planning.",
                 Image = fileMock.Object
             };
-            var mock = new Mock<IPostDataStore>();
 
-            var postService = new PostService(mock.Object);
+            byte[] imageData = null;
 
-            Exception ex = await Assert.ThrowsAsync<Exception>(() => postService.CreatePost(createPostModel));
+            var postService = new PostService(mock1.Object,mock2.Object);
+
+            Exception ex = await Assert.ThrowsAsync<Exception>(() => postService.CreatePost(createPostModel.Title,
+                createPostModel.ShortDescription,createPostModel.Image.FileName, imageData));
 
             Assert.Equal("Invalid file type.", ex.Message);
-        }
-
-        private async Task<List<Post>> GetTestPosts()
-        {
-            var posts = new List<Post>
-            {
-                new Post { Id=1, Title="Luxury interior in the design of apartments and houses", ShortDescription ="Designing premium interiors is a rejection of typical planning, finishing and decoration decisions " +
-                "in favor of a unique environment that best meets the needs of the customer.", ImageUrl = "i.jpeg"},
-                new Post { Id=2, Title="Luxury interior in the design of apartments and houses", ShortDescription ="Designing premium interiors is a rejection of typical planning, finishing and decoration decisions " +
-                "in favor of a unique environment that best meets the needs of the customer.", ImageUrl = "i.jpeg"}
-
-            };
-            return posts;
         }
     }
 }

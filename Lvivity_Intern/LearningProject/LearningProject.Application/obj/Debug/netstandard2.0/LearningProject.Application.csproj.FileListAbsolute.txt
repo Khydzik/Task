@@ -46,3 +46,15 @@ E:\Projects\Trainees\Vova\Lvivity_Intern\LearningProject\LearningProject.Applica
 E:\Projects\Trainees\Vova\Lvivity_Intern\LearningProject\LearningProject.Application\obj\Debug\netstandard2.0\LearningProject.Application.csproj.CopyComplete
 E:\Projects\Trainees\Vova\Lvivity_Intern\LearningProject\LearningProject.Application\obj\Debug\netstandard2.0\LearningProject.Application.dll
 E:\Projects\Trainees\Vova\Lvivity_Intern\LearningProject\LearningProject.Application\obj\Debug\netstandard2.0\LearningProject.Application.pdb
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Application\obj\Debug\netstandard2.0\LearningProject.Application.csprojAssemblyReference.cache
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Application\obj\Debug\netstandard2.0\LearningProject.Application.csproj.CoreCompileInputs.cache
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Application\obj\Debug\netstandard2.0\LearningProject.Application.AssemblyInfoInputs.cache
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Application\obj\Debug\netstandard2.0\LearningProject.Application.AssemblyInfo.cs
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Application\obj\Debug\netstandard2.0\LearningProject.Application.dll
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Application\bin\Debug\netstandard2.0\LearningProject.Application.deps.json
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Application\bin\Debug\netstandard2.0\LearningProject.Application.dll
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Application\bin\Debug\netstandard2.0\LearningProject.Application.pdb
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Application\bin\Debug\netstandard2.0\LearningProject.Data.dll
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Application\bin\Debug\netstandard2.0\LearningProject.Data.pdb
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Application\obj\Debug\netstandard2.0\LearningProject.Application.csproj.CopyComplete
+C:\Task\Lvivity_Intern\LearningProject\LearningProject.Application\obj\Debug\netstandard2.0\LearningProject.Application.pdb
